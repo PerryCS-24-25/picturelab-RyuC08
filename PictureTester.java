@@ -13,7 +13,10 @@ public class PictureTester {
     public static void testExplorer() {
         Picture bKarl = new Picture("blueKarl.jpg");
         bKarl.explore();
-
+        Picture lebron = new Picture("lebron.jpg");
+        lebron.explore();
+        Picture lesmall = lebron.scale(0.25, 0.25);
+        lesmall.write("smallLebron.jpg");
     }
 
     /**
