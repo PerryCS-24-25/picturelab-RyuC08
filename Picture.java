@@ -141,6 +141,87 @@ public class Picture extends SimplePicture {
     }
 
     /**
+     * Method to only keep the blue in this image
+     */ 
+    public void keepOnlyBlue(){
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                pixelObj.setRed(0);
+                pixelObj.setGreen(0);
+            }
+        }
+    }
+    /**
+     * Method to only keep the blue in this image
+     */ 
+    public void keepOnlyRed(){
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                pixelObj.setBlue(0);
+                pixelObj.setGreen(0);
+            }
+        }
+    }
+    /**
+     * Method to only keep the blue in this image
+     */ 
+    public void keepOnlyGreen(){
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                pixelObj.setRed(0);
+                pixelObj.setBlue(0);
+            }
+        }
+    }
+    /**
+     * All colors are 255 the original
+     */
+    public void negate(){
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                pixelObj.setRed(255 - pixelObj.getRed());
+                pixelObj.setGreen(255 - pixelObj.getGreen());
+                pixelObj.setBlue(255 - pixelObj.getBlue());
+            }
+        }
+    }
+    /**
+     * All colors are 1/3 of the original avg
+     */
+    public void grayscale(){
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                int avg = (pixelObj.getRed() + pixelObj.getGreen()+ pixelObj.getBlue())/3;
+                pixelObj.setRed(avg);
+                pixelObj.setGreen(avg);
+                pixelObj.setBlue(avg);
+            }
+        }
+    }
+
+    /**
+     * Make fish more visible
+     */
+    public void fixUnderwater(){
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                if((pixelObj.getRed() < 25) && (pixelObj.getBlue() > 155)){
+                    pixelObj.setBlue(pixelObj.getBlue() + 40);
+                }
+                //pixelObj.setRed(pixelObj.getRed() + 30);
+                //pixelObj.setGreen(pixelObj.getGreen() - 50);
+                
+            }
+        }
+    }
+
+    /**
      * Method that mirrors the picture around a vertical mirror in the center of
      * the picture from left to right
      */

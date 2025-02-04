@@ -30,6 +30,62 @@ public class PictureTester {
     }
 
     /**
+     * Method to test keepOnlyBlue
+     */
+    public static void testKeepOnlyBlue(){
+        Picture bMotor = new Picture("blueMotorcycle.jpg");
+        bMotor.explore();
+        bMotor.keepOnlyBlue();
+        bMotor.explore();
+    }
+    /**
+     * Method to test keepOnlyRed
+     */
+    public static void testKeepOnlyRed(){
+        Picture flower2 = new Picture("flower2.jpg");
+        flower2.explore();
+        flower2.keepOnlyRed();
+        flower2.explore();
+    }
+    /**
+     * Method to test keepOnlyGreen
+     */
+    public static void testKeepOnlyGreen(){
+        Picture flower = new Picture("flower1.jpg");
+        flower.explore();
+        flower.keepOnlyGreen();
+        flower.explore();
+    }
+    /**
+     * Method to test negate
+     */
+    public static void testNegate(){
+        Picture T7 = new Picture("T7.jpg");
+        T7.explore();
+        T7.negate();
+        T7.explore();
+    }
+    /**
+     * Method to test grayscale
+     */
+    public static void testGrayscale(){
+        Picture wall = new Picture("wall.jpg");
+        wall.explore();
+        wall.grayscale();
+        wall.explore();
+    }
+
+    /**
+     * Method to test fixUnderwater
+     */
+    public static void testFixUnderwater(){
+        Picture water = new Picture("water.jpg");
+        water.explore();
+        water.fixUnderwater();
+        water.explore();
+    }
+
+    /**
      * Method to test mirrorVertical
      */
     public static void testMirrorVertical() {
@@ -76,7 +132,7 @@ public class PictureTester {
         // and comment out the ones you don't want
         // to run
 
-        testExplorer();
+        //testExplorer();
         //testScale();
         //testZeroBlue();
         //testKeepOnlyBlue();
@@ -84,7 +140,7 @@ public class PictureTester {
         //testKeepOnlyGreen();
         //testNegate();
         //testGrayscale();
-        //testFixUnderwater();
+        testFixUnderwater();
         //testMirrorVertical();
         //testMirrorTemple();
         //testMirrorArms();
