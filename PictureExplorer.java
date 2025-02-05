@@ -153,6 +153,27 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
      */
     private JMenuItem close;
     /**
+     * file menu
+     */
+    private JMenu filterMenu;
+    /**
+     * file menu
+     */
+    private JMenuItem seperateColors;
+    /**
+     * file menu
+     */
+    private JMenuItem invertColors;
+    /**
+     * file menu
+     */
+    private JMenuItem grayscale;
+    /**
+     * file menu
+     */
+    private JMenuItem blackwhite;
+
+    /**
      * The picture being explored
      */
     private DigitalPicture picture;
@@ -252,6 +273,11 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         open = new JMenuItem("Open");
         save = new JMenuItem("Save");
         close = new JMenuItem("Close");
+        filterMenu = new JMenu("Filter");
+        seperateColors = new JMenuItem("Seperate Colors");
+        invertColors = new JMenuItem("Invert Colors");
+        grayscale = new JMenuItem("Grayscale");
+        blackwhite = new JMenuItem("Black and White");
 
         // add the action listeners
         twentyFive.addActionListener(this);
@@ -265,6 +291,11 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         open.addActionListener(this);
         save.addActionListener(this);
         close.addActionListener(this);
+        filterMenu.addActionListener(this);
+        seperateColors.addActionListener(this);
+        invertColors.addActionListener(this);
+        grayscale.addActionListener(this);
+        blackwhite.addActionListener(this);
 
         // add the menu items to the menus
         zoomMenu.add(twentyFive);
@@ -279,6 +310,11 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         fileMenu.add(save);
         fileMenu.add(close);
         menuBar.add(fileMenu);
+        filterMenu.add(seperateColors);
+        filterMenu.add(invertColors);
+        filterMenu.add(grayscale);
+        filterMenu.add(blackwhite);
+        menuBar.add(filterMenu);
 
         // set the menu bar to this menu
         pictureFrame.setJMenuBar(menuBar);
@@ -383,6 +419,36 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
 
         if (a.getActionCommand().equals(close.getActionCommand())) {
             pictureFrame.dispose();
+        }
+
+        if (a.getActionCommand().equals(seperateColors.getActionCommand())) {
+            Picture rPic = new Picture((SimplePicture)picture);
+            rPic.keepOnlyRed();
+            rPic.explore();
+            Picture gPic = new Picture((SimplePicture)picture);
+            gPic.keepOnlyGreen();
+            gPic.explore();
+            Picture bPic = new Picture((SimplePicture)picture);
+            bPic.keepOnlyBlue();
+            bPic.explore();
+        }
+
+        if (a.getActionCommand().equals(invertColors.getActionCommand())) {
+            Picture newPic = new Picture((SimplePicture)picture);
+            newPic.negate();
+            newPic.explore();
+        }
+
+        if (a.getActionCommand().equals(grayscale.getActionCommand())) {
+            Picture newPic = new Picture((SimplePicture)picture);
+            newPic.grayscale();
+            newPic.explore();
+        }
+
+        if (a.getActionCommand().equals(blackwhite.getActionCommand())) {
+            Picture newPic = new Picture((SimplePicture)picture);
+            newPic.blackandwhite();
+            newPic.explore();
         }
     }
 

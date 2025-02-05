@@ -203,6 +203,28 @@ public class Picture extends SimplePicture {
             }
         }
     }
+    /**
+     * All colors are made either black or white
+     */
+    public void blackandwhite(){
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                int avg = (pixelObj.getRed() + pixelObj.getGreen()+ pixelObj.getBlue())/3;
+                if(avg > 127){
+                    pixelObj.setRed(255);
+                    pixelObj.setGreen(255);
+                    pixelObj.setBlue(255);
+                }
+                else{
+                    pixelObj.setRed(0);
+                    pixelObj.setGreen(0);
+                    pixelObj.setBlue(0);
+                }
+                
+            }
+        }
+    }
 
     /**
      * Make water more clear
