@@ -205,20 +205,120 @@ public class Picture extends SimplePicture {
     }
 
     /**
-     * Make fish more visible
+     * Make water more clear
      */
     public void fixUnderwater(){
         Pixel[][] pixels = this.getPixels2D();
+        int lR = lowestRed();
+        int lG = lowestGreen();
+        int lB = lowestBlue();
+        int hR = highestRed();
+        int hG = highestGreen();
+        int hB = highestBlue();
+        double rScale = 255 / ((double)(hR - lR));
+        double gScale = 255 / ((double)(hG - lG));
+        double bScale = 255 / ((double)(hB - lB));
         for (Pixel[] rowArray : pixels) {
             for (Pixel pixelObj : rowArray) {
-                if((pixelObj.getRed() < 25) && (pixelObj.getBlue() > 155)){
-                    pixelObj.setBlue(pixelObj.getBlue() + 40);
-                }
-                //pixelObj.setRed(pixelObj.getRed() + 30);
-                //pixelObj.setGreen(pixelObj.getGreen() - 50);
-                
+                double newR = ((double)(pixelObj.getRed() - lR))*rScale;
+                double newG = ((double)(pixelObj.getGreen() - lG))*gScale;
+                double newB = ((double)(pixelObj.getBlue() - lB))*bScale;
+                pixelObj.setRed((int)(newR));
+                pixelObj.setGreen((int)(newG));
+                pixelObj.setBlue((int)(newB));
             }
         }
+    }
+
+    /*
+     * Find the lowest red value of an entire image
+     */
+    public int lowestRed(){
+        Pixel[][] pixels = this.getPixels2D();
+        int rLow = 255;
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                if(pixelObj.getRed() < rLow){
+                    rLow = pixelObj.getRed();
+                }
+            }
+        }
+        return rLow;
+    }
+    /*
+     * Find the lowest green value of an entire image
+     */
+    public int lowestGreen(){
+        Pixel[][] pixels = this.getPixels2D();
+        int gLow = 255;
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                if(pixelObj.getGreen() < gLow){
+                    gLow = pixelObj.getGreen();
+                }
+            }
+        }
+        return gLow;
+    }
+    /*
+     * Find the lowest blue value of an entire image
+     */
+    public int lowestBlue(){
+        Pixel[][] pixels = this.getPixels2D();
+        int bLow = 255;
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                if(pixelObj.getBlue() < bLow){
+                    bLow = pixelObj.getBlue();
+                }
+            }
+        }
+        return bLow;
+    }
+    /*
+     * Find the highest red value of an entire image
+     */
+    public int highestRed(){
+        Pixel[][] pixels = this.getPixels2D();
+        int rHigh = 0;
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                if(pixelObj.getRed() > rHigh){
+                    rHigh = pixelObj.getRed();
+                }
+            }
+        }
+        return rHigh;
+    }
+    /*
+     * Find the highest red value of an entire image
+     */
+    public int highestGreen(){
+        Pixel[][] pixels = this.getPixels2D();
+        int gHigh = 0;
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                if(pixelObj.getGreen() > gHigh){
+                    gHigh = pixelObj.getGreen();
+                }
+            }
+        }
+        return gHigh;
+    }
+    /*
+     * Find the highest red value of an entire image
+     */
+    public int highestBlue(){
+        Pixel[][] pixels = this.getPixels2D();
+        int bHigh = 0;
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                if(pixelObj.getBlue() > bHigh){
+                    bHigh = pixelObj.getBlue();
+                }
+            }
+        }
+        return bHigh;
     }
 
     /**
