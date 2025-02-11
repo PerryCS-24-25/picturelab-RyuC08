@@ -125,10 +125,10 @@ public class PictureTester {
      * Method to test mirrorHorizontal
      */
     public static void testMirrorDiagonal() {
-        Picture wFlower = new Picture("robot.jpg");
-        wFlower.explore();
-        wFlower.mirrorDiagonal();
-        wFlower.explore();
+        Picture robot = new Picture("robot.jpg");
+        robot.explore();
+        robot.mirrorDiagonal();
+        robot.explore();
     }
     /**
      * Method to test mirrorTemple
@@ -138,6 +138,24 @@ public class PictureTester {
         temple.explore();
         temple.mirrorTemple();
         temple.explore();
+    }
+    /**
+     * Method to test mirrorArms
+     */
+    public static void testMirrorArms() {
+        Picture snowman = new Picture("snowman.jpg");
+        snowman.explore();
+        snowman.mirrorArms();
+        snowman.explore();
+    }
+    /**
+     * Method to test mirrorGull
+     */
+    public static void testMirrorGull() {
+        Picture gull = new Picture("seagull.jpg");
+        gull.explore();
+        gull.mirrorGull();
+        gull.explore();
     }
 
     /**
@@ -183,7 +201,7 @@ public class PictureTester {
         //testMirrorTemple();
         //testMirrorArms();
         //testMirrorGull();
-        testMirrorDiagonal();
+        //testMirrorDiagonal();
         //testCollage();
         //testCopy();
         //testEdgeDetection();
