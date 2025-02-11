@@ -157,22 +157,38 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
      */
     private JMenu filterMenu;
     /**
-     * file menu
+     * seperate colors
      */
     private JMenuItem seperateColors;
     /**
-     * file menu
+     * invert colors
      */
     private JMenuItem invertColors;
     /**
-     * file menu
+     * grayscale
      */
     private JMenuItem grayscale;
     /**
-     * file menu
+     * black and white
      */
     private JMenuItem blackwhite;
-
+    /**
+     * mirror top to bottom
+     */
+    private JMenuItem topToBottom;
+    /**
+     * mirror right to left
+     */
+    private JMenuItem rightToLeft;
+    /**
+     * mirrow bottom to top
+     */
+    private JMenuItem bottomToTop;
+    /**
+     * mirror left to right
+     */
+    private JMenuItem leftToRight;
+    
     /**
      * The picture being explored
      */
@@ -278,6 +294,11 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         invertColors = new JMenuItem("Invert Colors");
         grayscale = new JMenuItem("Grayscale");
         blackwhite = new JMenuItem("Black and White");
+        topToBottom = new JMenuItem("Mirror Top to Bottom");
+        rightToLeft = new JMenuItem("Mirror Right to Left");
+        bottomToTop = new JMenuItem("Mirror Bottom To Top");
+        leftToRight = new JMenuItem("Mirror Left to Right");
+
 
         // add the action listeners
         twentyFive.addActionListener(this);
@@ -296,8 +317,16 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         invertColors.addActionListener(this);
         grayscale.addActionListener(this);
         blackwhite.addActionListener(this);
+        topToBottom.addActionListener(this);
+        rightToLeft.addActionListener(this);
+        bottomToTop.addActionListener(this);
+        leftToRight.addActionListener(this);
 
         // add the menu items to the menus
+        fileMenu.add(open);
+        fileMenu.add(save);
+        fileMenu.add(close);
+        menuBar.add(fileMenu);
         zoomMenu.add(twentyFive);
         zoomMenu.add(fifty);
         zoomMenu.add(seventyFive);
@@ -306,14 +335,14 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         zoomMenu.add(twoHundred);
         zoomMenu.add(fiveHundred);
         menuBar.add(zoomMenu);
-        fileMenu.add(open);
-        fileMenu.add(save);
-        fileMenu.add(close);
-        menuBar.add(fileMenu);
         filterMenu.add(seperateColors);
         filterMenu.add(invertColors);
         filterMenu.add(grayscale);
         filterMenu.add(blackwhite);
+        filterMenu.add(topToBottom);
+        filterMenu.add(rightToLeft);
+        filterMenu.add(bottomToTop);
+        filterMenu.add(leftToRight);
         menuBar.add(filterMenu);
 
         // set the menu bar to this menu
@@ -448,6 +477,30 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         if (a.getActionCommand().equals(blackwhite.getActionCommand())) {
             Picture newPic = new Picture((SimplePicture)picture);
             newPic.blackandwhite();
+            newPic.explore();
+        }
+
+        if (a.getActionCommand().equals(topToBottom.getActionCommand())) {
+            Picture newPic = new Picture((SimplePicture)picture);
+            newPic.mirrorHorizontal();
+            newPic.explore();
+        }
+
+        if (a.getActionCommand().equals(rightToLeft.getActionCommand())) {
+            Picture newPic = new Picture((SimplePicture)picture);
+            newPic.mirrorVerticalRightToLeft();
+            newPic.explore();
+        }
+
+        if (a.getActionCommand().equals(bottomToTop.getActionCommand())) {
+            Picture newPic = new Picture((SimplePicture)picture);
+            newPic.mirrorHorizontalBotToTop();
+            newPic.explore();
+        }
+
+        if (a.getActionCommand().equals(leftToRight.getActionCommand())) {
+            Picture newPic = new Picture((SimplePicture)picture);
+            newPic.mirrorVertical();
             newPic.explore();
         }
     }
