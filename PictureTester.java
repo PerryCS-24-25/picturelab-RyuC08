@@ -157,7 +157,18 @@ public class PictureTester {
         gull.mirrorGull();
         gull.explore();
     }
-
+    /*
+     * Method to test encode and decode
+     */
+    public static void testEncodeAndDecode(){
+        Picture hall = new Picture("femaleLionAndHall.jpg");
+        hall.explore();
+        Picture msg = new Picture("msg.jpg");
+        hall.encode(msg);
+        hall.explore();
+        hall.decode();
+        hall.explore();
+    }
     /**
      * Method to test edgeDetection
      */
@@ -207,7 +218,7 @@ public class PictureTester {
         //testEdgeDetection();
         //testEdgeDetection2();
         //testChromakey();
-        //testEncodeAndDecode();
+        testEncodeAndDecode();
         //testGetCountRedOverValue(250);
         //testSetRedToHalfValueInTopHalf();
         //testClearBlueOverValue(200);

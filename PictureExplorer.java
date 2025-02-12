@@ -188,7 +188,15 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
      * mirror left to right
      */
     private JMenuItem leftToRight;
-    
+    /**
+     * hide message
+     */
+    private JMenuItem hide;
+    /**
+     * return original message
+     */
+    private JMenuItem unhide;
+
     /**
      * The picture being explored
      */
@@ -298,7 +306,8 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         rightToLeft = new JMenuItem("Mirror Right to Left");
         bottomToTop = new JMenuItem("Mirror Bottom To Top");
         leftToRight = new JMenuItem("Mirror Left to Right");
-
+        hide = new JMenuItem("Hide Image");
+        unhide = new JMenuItem("Unhide Image");
 
         // add the action listeners
         twentyFive.addActionListener(this);
@@ -321,6 +330,8 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         rightToLeft.addActionListener(this);
         bottomToTop.addActionListener(this);
         leftToRight.addActionListener(this);
+        hide.addActionListener(this);
+        unhide.addActionListener(this);
 
         // add the menu items to the menus
         fileMenu.add(open);
@@ -343,6 +354,8 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         filterMenu.add(rightToLeft);
         filterMenu.add(bottomToTop);
         filterMenu.add(leftToRight);
+        filterMenu.add(hide);
+        filterMenu.add(unhide);
         menuBar.add(filterMenu);
 
         // set the menu bar to this menu
@@ -501,6 +514,19 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         if (a.getActionCommand().equals(leftToRight.getActionCommand())) {
             Picture newPic = new Picture((SimplePicture)picture);
             newPic.mirrorVertical();
+            newPic.explore();
+        }
+
+        if (a.getActionCommand().equals(hide.getActionCommand())) {
+            Picture newPic = new Picture((SimplePicture)picture);
+            Picture hidden = FileChooser.showOpenDialog(pictureFrame);
+            newPic.encode(hidden);
+            newPic.explore();
+        }
+
+        if (a.getActionCommand().equals(unhide.getActionCommand())) {
+            Picture newPic = new Picture((SimplePicture)picture);
+            newPic.decode();
             newPic.explore();
         }
     }

@@ -518,6 +518,58 @@ public class Picture extends SimplePicture {
         }
     }
 
+    /*
+     * Takes the black and white picture message and changes the current picture to hide the message picture inside of it
+     */
+    public void encode(Picture newImage){
+        Pixel[][] pixels = this.getPixels2D();
+        Picture hidden = newImage;
+        hidden.blackandwhite();
+        Pixel[][] msg = hidden.getPixels2D();
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                if((pixelObj.getRed() % 2) != 0){
+                    pixelObj.setRed(pixelObj.getRed() - 1);
+                }
+            }
+        }
+        int width = pixels[0].length;
+        int length = pixels.length;
+        if(msg[0].length < pixels[0].length){
+            width = msg[0].length;
+        }
+        if(msg.length < pixels.length){
+            length = msg.length;
+        }
+        for (int row = 0; row < length; row++) {
+            for (int col = 0; col < width; col++) {
+                if(msg[row][col].getRed() == 0){
+                    pixels[row][col].setRed(pixels[row][col].getRed() + 1);
+                }
+            }
+        }
+    }
+    /*
+     * returns the picture hidden in the current picture
+     */
+    public void decode(){
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                if((pixelObj.getRed() % 2) == 0){
+                    pixelObj.setRed(255);
+                    pixelObj.setGreen(255);
+                    pixelObj.setBlue(255);
+                }
+                else{
+                    pixelObj.setRed(0);
+                    pixelObj.setGreen(0);
+                    pixelObj.setBlue(0);
+                }
+            }
+        }
+    }
+
     /**
      * copy from the passed fromPic to the specified startRow and startCol in the
      * current picture
