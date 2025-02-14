@@ -196,7 +196,10 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
      * return original message
      */
     private JMenuItem unhide;
-
+    /**
+     * green/blue screen an image
+     */
+    private JMenuItem chromakey;
     /**
      * The picture being explored
      */
@@ -308,6 +311,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         leftToRight = new JMenuItem("Mirror Left to Right");
         hide = new JMenuItem("Hide Image");
         unhide = new JMenuItem("Unhide Image");
+        chromakey = new JMenuItem("Chromakey");
 
         // add the action listeners
         twentyFive.addActionListener(this);
@@ -332,6 +336,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         leftToRight.addActionListener(this);
         hide.addActionListener(this);
         unhide.addActionListener(this);
+        chromakey.addActionListener(this);
 
         // add the menu items to the menus
         fileMenu.add(open);
@@ -356,6 +361,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         filterMenu.add(leftToRight);
         filterMenu.add(hide);
         filterMenu.add(unhide);
+        filterMenu.add(chromakey);
         menuBar.add(filterMenu);
 
         // set the menu bar to this menu
@@ -527,6 +533,13 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         if (a.getActionCommand().equals(unhide.getActionCommand())) {
             Picture newPic = new Picture((SimplePicture)picture);
             newPic.decode();
+            newPic.explore();
+        }
+
+        if (a.getActionCommand().equals(chromakey.getActionCommand())) {
+            Picture newPic = new Picture((SimplePicture)picture);
+            Picture bGround = FileChooser.showOpenDialog(pictureFrame);
+            newPic.chromakey(bGround, swatchColor.getRed(), swatchColor.getGreen(), swatchColor.getBlue());
             newPic.explore();
         }
     }

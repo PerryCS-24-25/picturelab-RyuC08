@@ -569,7 +569,30 @@ public class Picture extends SimplePicture {
             }
         }
     }
-
+    
+    /*
+     * replace a given pixel color with the color from another picture
+     */
+    public void chromakey(Picture background, int red, int green, int blue){
+        Pixel[][] pixels = this.getPixels2D();
+        Pixel[][] bGroundPixels = background.getPixels2D();
+        int rRange = 50;
+        int gRange = 50;
+        int bRange = 50;
+        for (int row = 0; row < pixels.length; row++) {
+            for (int col = 0; col < pixels[0].length; col++) {
+                if((pixels[row][col].getRed() > (red - rRange) && (pixels[row][col].getRed() < (red + rRange))) &&
+                    (pixels[row][col].getGreen() > (green - gRange) && (pixels[row][col].getGreen() < (green + gRange))) &&
+                    (pixels[row][col].getBlue() > (blue - bRange) && (pixels[row][col].getBlue() < (blue + bRange)))
+                )
+                {   
+                    pixels[row][col].setRed(bGroundPixels[row][col].getRed());
+                    pixels[row][col].setGreen(bGroundPixels[row][col].getGreen());
+                    pixels[row][col].setBlue(bGroundPixels[row][col].getBlue());
+                }
+            }
+        }
+    }
     /**
      * copy from the passed fromPic to the specified startRow and startCol in the
      * current picture

@@ -169,6 +169,16 @@ public class PictureTester {
         hall.decode();
         hall.explore();
     }
+    /*
+     * Method to test chromakey
+     */
+    public static void testChromakey(){
+        Picture img = new Picture("blue-mark.jpg");
+        img.explore();
+        Picture bGround = new Picture("moon-surface.jpg");
+        img.chromakey(bGround, 10, 40, 70);
+        img.explore();
+    }
     /**
      * Method to test edgeDetection
      */
@@ -217,8 +227,8 @@ public class PictureTester {
         //testCopy();
         //testEdgeDetection();
         //testEdgeDetection2();
-        //testChromakey();
-        testEncodeAndDecode();
+        testChromakey();
+        //testEncodeAndDecode();
         //testGetCountRedOverValue(250);
         //testSetRedToHalfValueInTopHalf();
         //testClearBlueOverValue(200);
