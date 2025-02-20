@@ -201,6 +201,10 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
      */
     private JMenuItem chromakey;
     /**
+     * pixelate an image
+     */
+    private JMenuItem pixelate;
+    /**
      * The picture being explored
      */
     private DigitalPicture picture;
@@ -312,6 +316,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         hide = new JMenuItem("Hide Image");
         unhide = new JMenuItem("Unhide Image");
         chromakey = new JMenuItem("Chromakey");
+        pixelate = new JMenuItem("Pixelate");
 
         // add the action listeners
         twentyFive.addActionListener(this);
@@ -337,6 +342,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         hide.addActionListener(this);
         unhide.addActionListener(this);
         chromakey.addActionListener(this);
+        pixelate.addActionListener(this);
 
         // add the menu items to the menus
         fileMenu.add(open);
@@ -362,6 +368,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         filterMenu.add(hide);
         filterMenu.add(unhide);
         filterMenu.add(chromakey);
+        filterMenu.add(pixelate);
         menuBar.add(filterMenu);
 
         // set the menu bar to this menu
@@ -540,6 +547,14 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
             Picture newPic = new Picture((SimplePicture)picture);
             Picture bGround = FileChooser.showOpenDialog(pictureFrame);
             newPic.chromakey(bGround, swatchColor.getRed(), swatchColor.getGreen(), swatchColor.getBlue());
+            newPic.explore();
+        }
+
+        if (a.getActionCommand().equals(pixelate.getActionCommand())) {
+            Picture newPic = new Picture((SimplePicture)picture);
+            String resp = JOptionPane.showInputDialog(pictureFrame, "What is the threshold?", 25);
+            int val = Integer.parseInt(resp);
+            newPic.pixelate(val);
             newPic.explore();
         }
     }

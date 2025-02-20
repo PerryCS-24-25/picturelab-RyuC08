@@ -593,6 +593,38 @@ public class Picture extends SimplePicture {
             }
         }
     }
+
+    /*
+     * Make image more pixelated
+     */
+    public void pixelate(int threshold){
+        double scale = (double)(1/((double)threshold));
+        Pixel[][] pixels = this.getPixels2D();
+        Picture temp = this.scale(scale, scale);
+        Picture pixelated = temp.scale(1/scale, 1/scale);
+        Pixel[][] nPixels = pixelated.getPixels2D();
+        int sRow;
+        int sCol;
+        if(nPixels.length>pixels.length){
+            sRow = pixels.length;
+        }
+        else{
+            sRow = nPixels.length;
+        }
+        if(nPixels.length>pixels.length){
+            sCol = pixels[0].length;
+        }
+        else{
+            sCol = nPixels[0].length;
+        }
+        for (int row = 0; row < sRow; row++) {
+            for (int col = 0; col < sCol; col++) {
+                pixels[row][col].setRed(nPixels[row][col].getRed());
+                pixels[row][col].setGreen(nPixels[row][col].getGreen());
+                pixels[row][col].setBlue(nPixels[row][col].getBlue());
+            }
+        }
+    }
     /**
      * copy from the passed fromPic to the specified startRow and startCol in the
      * current picture

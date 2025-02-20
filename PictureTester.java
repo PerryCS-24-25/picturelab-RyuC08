@@ -17,6 +17,8 @@ public class PictureTester {
         lebron.explore();
         Picture lesmall = lebron.scale(0.25, 0.25);
         lesmall.write("smallLebron.jpg");
+        Picture test = lesmall.scale(4, 4);
+        test.explore();
     }
 
     /**
@@ -179,6 +181,15 @@ public class PictureTester {
         img.chromakey(bGround, 10, 40, 70);
         img.explore();
     }
+    /*
+     * Method to test pixelate
+     */
+    public static void testPixelate(){
+        Picture img = new Picture("lebron.jpg");
+        img.explore();
+        img.pixelate(25);
+        img.explore();
+    }
     /**
      * Method to test edgeDetection
      */
@@ -227,7 +238,8 @@ public class PictureTester {
         //testCopy();
         //testEdgeDetection();
         //testEdgeDetection2();
-        testChromakey();
+        //testChromakey();
+        testPixelate();
         //testEncodeAndDecode();
         //testGetCountRedOverValue(250);
         //testSetRedToHalfValueInTopHalf();
